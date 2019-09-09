@@ -19,11 +19,14 @@ class trackTouches{
     if (this.initialY === null) {
       return;
     }
-    var currentX = e.touches[0].clientX;
-    var currentY = e.touches[0].clientY;
-    var diffX = this.initialX - currentX;
-    var diffY = this.initialY - currentY;
-    var eventString = "";
+    let currentX = e.touches[0].clientX;
+    let currentY = e.touches[0].clientY;
+    let diffX = this.initialX - currentX;
+    let diffY = this.initialY - currentY;
+    let eventResponse = {};
+    eventResponse.currentX = currentX;
+    eventResponse.currentY = currentY;
+    let eventString = "";
     if (Math.abs(diffX) > Math.abs(diffY)) {
       if (diffX > 0) {
         eventString = "Left";
@@ -37,7 +40,8 @@ class trackTouches{
         eventString = "Down";
       }
     }
-    this.__callback(eventString);
+    eventResponse.eventString = eventString;
+    this.__callback(eventResponse);
     this.initialX = null;
     this.initialY = null;
   }
